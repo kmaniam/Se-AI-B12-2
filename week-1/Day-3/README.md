@@ -445,4 +445,216 @@ The Day-3 PyAutoGUI exercise successfully automated a real-world workflow involv
 - Screenshots
 - Python automation
 
+# Day 3 – Python Automation
+
+## Overview
+
+Day 3 focused on browser automation, GUI automation, web data extraction, Excel automation, and Playwright-based web testing.
+
+---
+
+## 1. PyAutoGUI – Weather to Excel Automation
+
+### Objective
+
+Automate the following workflow using Python and PyAutoGUI:
+
+1. Open Google Chrome.
+2. Navigate to the Chennai Weather page.
+3. Copy information from the webpage.
+4. Extract useful weather information.
+5. Open Microsoft Excel.
+6. Create a report containing:
+   - Date & Time
+   - Fetched Data
+   - Comment
+7. Save the Excel file with the current date.
+8. Take a screenshot of the final Excel sheet.
+9. Verify that the generated files exist.
+
+### Technologies Used
+
+- Python
+- PyAutoGUI
+- Pyperclip
+- Microsoft Excel
+- Google Chrome
+- Regular Expressions (`re`)
+- Python `datetime`
+- OS/file handling
+
+### Weather URL
+
+https://weather.com/en-IN/in/tamil-nadu/city/chennai/tenday
+
+### Python File
+
+`daily_report_bot.py`
+
+### Output Files
+
+The script generates files using the current date:
+
+```text
+daily_report_YYYY-MM-DD.xlsx
+daily_report_YYYY-MM-DD.png
+
+Important Features
+- Date and time are generated automatically at runtime.
+- No hard-coded report date.
+- Weather information is extracted from copied webpage text.
+- Temperature patterns are detected using regular expressions.
+- Excel data is inserted using clipboard-based tab-separated values.
+- Excel file existence is verified after saving.
+- Screenshot is taken after verifying the Excel file.
+- File paths are generated automatically.
+Example Excel Structure
+Date & Time	Fetched Data	Comment
+Runtime generated	Weather information	Check current conditions before outdoor activities.
+
+
+2. PyAutoGUI Debugging and Improvements
+During development, several issues were identified and fixed.
+Issue 1 – Missing pyperclip
+The script initially produced:
+NameError: name 'pyperclip' is not defined
+
+This was fixed by importing:
+import pyperclip
+
+
+Issue 2 – Incorrect Excel Save
+The initial automation entered the filename/path into the Excel worksheet instead of correctly saving the workbook.
+The Excel Save As workflow was improved by:
+- Opening Save As explicitly.
+- Focusing the correct File Name field.
+- Navigating to the required folder.
+- Entering only the filename.
+- Verifying that the .xlsx file actually exists.
+Issue 3 – Incorrect Data Placement
+The Excel automation initially had problems with values being placed in the wrong cells.
+This was improved by preparing tab-separated data:
+report_text = (    "Date & Time\tFetched Data\tComment\n"    f"{report_datetime}\t{fetched_data}\t{COMMENT}")
+
+
+Then the complete data was pasted into Excel using the clipboard.
+Issue 4 – Large Monitor / Screen Coordinates
+Fixed screen coordinates were avoided as much as possible because the automation is running on a large monitor.
+The script uses keyboard shortcuts such as:
+Win + R
+Ctrl + L
+Ctrl + N
+Ctrl + Shift + S
+Alt + N
+Alt + D
+Ctrl + Home
+
+This makes the automation more reliable than depending heavily on fixed mouse coordinates.
+3. Playwright – Cricbuzz Score Automation
+Objective
+Create a Playwright automation that:
+1. Opens Cricbuzz.
+2. Finds the cricket score from the page.
+3. Prints the score in the terminal.
+4. Saves a screenshot as score.png.
+5. Runs first in headed mode.
+6. Runs again in headless mode.
+7. Confirms the result.
+Website
+https://www.cricbuzz.com/cricket-match/live-scores
+Python File
+cricbuzz_score.py
+Technology Used
+- Python
+- Playwright
+- Chromium / Chrome
+- Regular Expressions
+4. Playwright Score Detection
+Instead of assuming a specific CSS selector, the page was inspected to identify score-like elements.
+The automation searches for common cricket score formats such as:
+123/4
+21-2
+173 & 358
+
+The regular expression used was:
+r"\b\d{1,3}\s*(?:/|-|&)\s*\d{1,3}\b"
+
+
+The script waits for the page body to become visible before inspecting the DOM.
+Example:
+page.locator("body").wait_for(    state="visible",    timeout=30000)
+
+
+This avoids relying on a fixed sleep for score detection.
+5. Headed and Headless Testing
+Headed Mode
+The first test was executed with the browser visible.
+Purpose:
+- Watch the browser open.
+- Confirm Cricbuzz loads.
+- Inspect the page.
+- Find the score.
+- Save the screenshot.
+Screenshot:
+score.png
+
+Headless Mode
+After the headed test worked, the same automation was executed without displaying the browser.
+This verified the automation in headless mode.
+6. Cricbuzz / Akamai Issue
+During testing, headless mode initially returned an Akamai error page:
+https://errors.edgesuite.net/
+
+Because the returned page was not the Cricbuzz score page, the score selector could not find a score.
+The script was improved to detect this situation instead of incorrectly reporting that a score was found.
+The final version also uses Chrome when launching Playwright:
+browser = playwright.chromium.launch(    channel="chrome",    headless=headless)
+
+
+This improved the reliability of the browser automation.
+7. Final Day-3 Deliverables
+The main files created/worked on during Day 3 are:
+Day-3/
+│
+├── daily_report_bot.py
+├── cricbuzz_score.py
+├── daily_report_YYYY-MM-DD.xlsx
+├── daily_report_YYYY-MM-DD.png
+└── score.png
+
+8. Skills Learned
+By completing Day 3, I practiced:
+- Python GUI automation
+- PyAutoGUI
+- Clipboard automation
+- Chrome automation
+- Excel automation
+- Webpage text extraction
+- Regular expressions
+- Runtime date/time generation
+- File handling and validation
+- Playwright Sync API
+- DOM inspection
+- Dynamic element detection
+- Headed browser automation
+- Headless browser automation
+- Browser troubleshooting
+- Handling website/Akamai blocking
+- Creating screenshots as automation evidence
+- Debugging Python automation scripts
+Day-3 Status
+Completed successfully
+- [x] PyAutoGUI weather automation
+- [x] Weather data extraction
+- [x] Excel report creation
+- [x] Excel file saving
+- [x] Excel output verification
+- [x] Excel screenshot
+- [x] Playwright installation/testing
+- [x] Cricbuzz score extraction
+- [x] Headed browser test
+- [x] Headless browser test
+- [x] score.png screenshot
+- [x] Debugging and error handling
+
 The final objective is to capture the **available selectable text/data from the Chennai Weather webpage**, paste it into Notepad, and save the result automatically in the Day-3 project folder.
