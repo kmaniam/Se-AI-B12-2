@@ -67,8 +67,8 @@ print(doc.page_content)
 
    Example Code (Recursive Splitting)
 ```
-   Pythonf
-   rom langchain_text_splitters import RecursiveCharacterTextSplitter
+   Python
+from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 text = "LangChain makes building context-aware LLM apps simple. Text splitting ensures chunks fit into context limits."
 splitter = RecursiveCharacterTextSplitter(chunk_size=40, chunk_overlap=10)
