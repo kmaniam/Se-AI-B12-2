@@ -1,4 +1,6 @@
-# Social Eagle AI - Week 2: LangChain Ecosystem & Core Components
+# Social Eagle AI - Week 2: Day -3 
+
+LangChain Ecosystem & Core Components
 
 This repository contains high-level notes, code examples, and key takeaways from Week 2 of the **Social Eagle AI** curriculum covering LangChain and RAG fundamentals.
 
