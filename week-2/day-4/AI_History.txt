@@ -1,0 +1,204 @@
+# History of Artificial Intelligence (AI)
+
+## 1. What is Artificial Intelligence?
+
+Artificial Intelligence (AI) is a branch of computer science that focuses on creating machines and software capable of performing tasks that normally require human intelligence.
+
+These tasks include learning, problem-solving, understanding language, recognizing images, making decisions, and generating content.
+
+**Examples of AI:**
+- ChatGPT: Answers questions and generates text.
+- Siri and Alexa: Understand voice commands.
+- Self-driving systems: Analyze road conditions and identify obstacles.
+- Recommendation systems: Suggest movies, music, and products.
+- Fraud detection: Identifies suspicious financial transactions.
+
+## 2. History of Artificial Intelligence
+
+AI has developed over several decades, from early theoretical ideas to modern generative AI systems.
+
+### 1940s–1950s: Foundations of AI
+
+In 1943, Warren McCulloch and Walter Pitts proposed a mathematical model of artificial neurons. Their work helped establish foundations for neural networks.
+
+In 1950, British mathematician Alan Turing published a paper titled *Computing Machinery and Intelligence*. He asked whether machines could think and proposed what later became known as the Turing Test.
+
+In 1956, the Dartmouth Summer Research Project on Artificial Intelligence took place in the United States. The term "Artificial Intelligence" is associated with this project, organized by John McCarthy and other researchers. This event is widely considered the birth of AI as a research field.
+
+### 1960s–1970s: Early AI Programs
+
+Researchers developed programs that could solve mathematical problems, manipulate symbols, and process simple language.
+
+ELIZA, developed by Joseph Weizenbaum in the 1960s, simulated conversation using text patterns.
+
+However, early computers had limited processing power and memory. Many AI systems could not handle complex real-world problems.
+
+### 1970s–1980s: AI Winters and Expert Systems
+
+An AI winter is a period when funding, public interest, and investment in AI research decline because the technology does not meet expectations.
+
+During the 1970s, limitations in computing power and AI capabilities contributed to reduced support for some projects.
+
+In the 1980s, expert systems became commercially important. These systems used rules and knowledge from specialists to solve specific problems.
+
+For example, MYCIN was an expert system developed to assist with identifying certain bacterial infections and recommending treatments. It was a research system, not a general-purpose doctor.
+
+### 1990s: Machine Learning Advances
+
+AI research increasingly focused on methods that allow computers to learn patterns from data instead of relying only on manually written rules.
+
+In 1997, IBM's Deep Blue defeated world chess champion Garry Kasparov in a match. This was a major milestone in computer chess and specialized problem-solving.
+
+Machine learning began to play an increasingly important role in areas such as speech recognition, forecasting, and data analysis.
+
+### 2000s: Big Data and Better Computing
+
+The growth of the internet, larger datasets, and more powerful computers helped AI applications advance.
+
+AI became increasingly useful in:
+- Search engines
+- Email spam filtering
+- Online recommendations
+- Speech recognition
+- Fraud detection
+
+Graphics processing units (GPUs) later became especially important for training large neural networks.
+
+### 2012: Deep Learning Breakthrough
+
+In 2012, AlexNet achieved a major breakthrough in the ImageNet image-recognition competition.
+
+The result demonstrated the effectiveness of deep neural networks trained using large datasets and GPU computing. Deep learning subsequently advanced image recognition, speech processing, and other AI applications.
+
+### 2016: AlphaGo
+
+Google DeepMind's AlphaGo defeated Go champion Lee Sedol in a five-game match.
+
+Go is a complex board game with an enormous number of possible positions. AlphaGo combined deep neural networks with search techniques to select moves.
+
+The achievement demonstrated the capabilities of modern AI in a difficult strategic task.
+
+### 2017: Transformer Architecture
+
+Researchers introduced the Transformer architecture in the paper *Attention Is All You Need*.
+
+Transformers use an attention mechanism to process relationships between elements in sequences. The architecture became foundational to many modern language models and generative AI systems.
+
+### 2020–2022: Large Language Models and Generative AI
+
+Large language models (LLMs) became increasingly capable of generating text, answering questions, summarizing documents, and assisting with programming.
+
+In November 2022, OpenAI launched ChatGPT, bringing conversational generative AI to a broad public audience.
+
+Generative AI can produce new content, including text, images, audio, video, and code.
+
+### 2023–Present: AI Assistants, RAG, and Multimodal AI
+
+Modern AI systems increasingly combine language models with external tools, databases, documents, and other information sources.
+
+Retrieval-Augmented Generation (RAG) is one important approach. It retrieves relevant information from a knowledge source and provides that information to a language model to help generate a grounded answer.
+
+RAG is useful for answering questions about company policies, technical documentation, training materials, manuals, and other private or specialized knowledge.
+
+Multimodal AI systems can work with combinations of text, images, audio, and video. AI agents can also use tools to carry out multi-step tasks.
+
+## 3. Important AI Terms
+
+**Artificial Intelligence (AI):** The broad field of building systems that perform tasks associated with human intelligence.
+
+**Machine Learning (ML):** A branch of AI in which systems learn patterns from data.
+
+**Deep Learning:** A type of machine learning that uses neural networks with multiple layers.
+
+**Natural Language Processing (NLP):** Techniques for processing and understanding human language.
+
+**Large Language Model (LLM):** A model trained on large amounts of data to process and generate language.
+
+**Generative AI:** AI that generates content such as text, images, audio, video, or code.
+
+**Embedding:** A numerical representation of data that helps systems compare semantic similarity.
+
+**Vector Database:** A database designed to store and search vector representations efficiently.
+
+**Retrieval-Augmented Generation (RAG):** An approach that retrieves relevant external information and supplies it to a language model when generating an answer.
+
+**Hallucination:** An AI response that contains fabricated or unsupported information presented as if it were true.
+
+## 4. How RAG Works
+
+A typical RAG system follows these steps:
+
+1. Document ingestion: Load documents such as PDFs, Word files, and text files.
+2. Text extraction: Extract readable text from the documents.
+3. Chunking: Divide long documents into smaller sections.
+4. Embedding: Convert chunks into numerical vectors.
+5. Indexing: Store the vectors and associated text in a searchable index or vector database.
+6. Retrieval: Search for document sections relevant to the user's question.
+7. Generation: Provide the retrieved sections and question to the language model.
+8. Response: Generate an answer grounded in the retrieved content.
+
+**Example:**
+
+Question: "When was the term Artificial Intelligence introduced?"
+
+Retrieved information: "The term Artificial Intelligence is associated with the Dartmouth Summer Research Project on Artificial Intelligence in 1956."
+
+Generated answer: "The term Artificial Intelligence is associated with the Dartmouth research project held in 1956."
+
+RAG can help reduce unsupported answers, but it does not guarantee that every response will be correct. The quality of the retrieved documents and the generation process matters.
+
+## 5. AI History: Quick Reference
+
+| Year | Milestone |
+|---|---|
+| 1943 | Artificial neuron model proposed |
+| 1950 | Alan Turing publishes work on machine intelligence |
+| 1956 | Dartmouth AI research project |
+| 1960s | Early conversational and symbolic AI programs |
+| 1970s–1980s | AI winters and expert systems |
+| 1997 | IBM Deep Blue defeats Garry Kasparov in a match |
+| 2012 | AlexNet advances image recognition |
+| 2016 | AlphaGo defeats Lee Sedol |
+| 2017 | Transformer architecture introduced |
+| 2022 | ChatGPT launched publicly |
+| 2023 onward | Rapid growth in generative AI, RAG, multimodal systems, and AI agents |
+
+## 6. Benefits and Limitations of AI
+
+### Benefits
+- Automates repetitive tasks.
+- Analyzes large volumes of data.
+- Helps users find and summarize information.
+- Supports decision-making.
+- Enables conversational interfaces and content generation.
+
+### Limitations
+- May produce incorrect or fabricated answers.
+- Can reflect bias in training data.
+- May require significant computing resources.
+- Can expose sensitive information if systems are poorly designed.
+- Requires human oversight for important decisions.
+
+## 7. Conclusion
+
+Artificial Intelligence has evolved from theoretical research and rule-based programs into powerful machine learning, deep learning, and generative AI systems.
+
+RAG builds on these developments by combining language models with external knowledge sources. It is especially useful when a system must answer questions using a specific collection of documents rather than relying only on information learned during model training.
+
+## 8. Sample Questions for a RAG Demo
+
+1. What is Artificial Intelligence?
+2. Who proposed the Turing Test, and in which year?
+3. Why is 1956 considered an important year in AI history?
+4. What is an AI winter?
+5. What was IBM Deep Blue known for?
+6. What happened in the 2012 ImageNet competition?
+7. What is the Transformer architecture?
+8. What is a Large Language Model?
+9. What is Retrieval-Augmented Generation?
+10. What are the main steps in a RAG pipeline?
+11. How does RAG help answer questions about private documents?
+12. What is the difference between machine learning and generative AI?
+13. What are two limitations of AI?
+14. Which AI milestone occurred in 2016?
+15. Why should RAG answers be checked for accuracy?
