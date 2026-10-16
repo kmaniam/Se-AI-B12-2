@@ -1,0 +1,2 @@
+Oracle Data Guard protects a database by maintaining a standby database.
+A physical standby database applies redo data from the primary database.

@@ -1,0 +1,130 @@
+
+Oracle Database 19c - DBA Knowledge Notes
+
+1. TABLESPACES AND DATAFILES
+
+A tablespace is a logical storage unit in an Oracle database.
+A permanent tablespace stores persistent database objects.
+A temporary tablespace supports operations that require temporary
+workspace, such as sorts and some join operations.
+An undo tablespace stores undo records used for transaction rollback,
+read consistency, and certain recovery operations.
+A tablespace consists of one or more datafiles.
+Datafiles are physical operating-system files that store database data.
+DBAs monitor tablespace usage and datafile capacity to prevent
+space-related failures.
+Autoextend can allow a datafile to grow automatically, subject to
+its configured maximum size and available storage.
+
+2. ORACLE INDEXES AND SQL PERFORMANCE
+
+An Oracle index helps the database locate rows efficiently.
+Indexes can improve query performance when the optimizer determines
+that index access is appropriate.
+Indexes consume storage and can add overhead to INSERT, UPDATE,
+and DELETE operations.
+An index does not guarantee that every query will run faster.
+DBAs review execution plans, predicates, statistics, and workload
+before deciding whether an index is useful.
+The cost-based optimizer uses statistics and other information
+to choose an execution plan.
+
+3. RMAN BACKUP, RESTORE, AND RECOVERY
+
+Oracle Recovery Manager (RMAN) is an Oracle utility used to back up,
+restore, and recover Oracle databases.
+A backup is useful only if it can support the required recovery goal.
+DBAs validate backups and periodically test restore and recovery.
+A complete recovery aims to restore the database to the latest
+required consistent point, subject to available backups and redo.
+Point-in-time recovery restores the database to an earlier target
+time, SCN, or log sequence as supported by the recovery scenario.
+Archived redo logs are important for many recovery strategies.
+The control file and recovery catalog, when used, contain backup
+metadata required for managing RMAN backups.
+
+4. ORACLE DATABASE STARTUP AND SHUTDOWN
+
+Oracle instance startup includes starting the instance and mounting
+and opening the database, depending on the requested startup mode.
+NOMOUNT starts the instance without mounting the database.
+MOUNT associates the instance with the database control files
+without opening the database for normal access.
+OPEN opens the database for normal operation, subject to its state.
+SHUTDOWN IMMEDIATE prevents new connections and waits for active
+transactions to finish or be rolled back before closing the database.
+The appropriate startup or shutdown mode depends on the maintenance
+or recovery task being performed.
+
+5. ORACLE ALERT LOG AND DIAGNOSTICS
+
+The alert log records important database events, errors, and
+administrative operations.
+The Automatic Diagnostic Repository (ADR) stores diagnostic data
+such as alert logs, trace files, and incident information.
+DBAs investigate relevant ORA- errors, timestamps, trace files,
+and related events when troubleshooting.
+On Windows, Oracle diagnostic files are generally located under
+the ADR base configured for the Oracle installation.
+The exact location can be checked through database diagnostic
+parameters and ADR tools.
+
+6. TABLESPACE SPACE MANAGEMENT
+
+DBAs monitor allocated space, used space, free space, and growth.
+A tablespace reaching its capacity can cause application operations
+to fail when additional space is required.
+Possible remediation includes adding a datafile, resizing a datafile,
+adjusting autoextend settings, or reclaiming space where appropriate.
+Before making changes, DBAs check filesystem or ASM capacity,
+datafile limits, business requirements, and storage policies.
+TEMP tablespace pressure and UNDO tablespace pressure require
+different investigation approaches from permanent tablespace issues.
+
+7. ORACLE ENTERPRISE MANAGER (OEM)
+
+Oracle Enterprise Manager can monitor database availability,
+performance, incidents, alerts, and configured targets.
+DBAs review target status, alert details, metric thresholds,
+collection status, and diagnostic information during investigation.
+A monitoring alert should be validated against database symptoms
+and supporting evidence before corrective action is taken.
+Agent availability and communication with the management service
+are important for reliable monitoring.
+OEM does not replace database-level diagnostics or recovery testing.
+
+8. ORACLE PERFORMANCE TROUBLESHOOTING
+
+When a database becomes slow, DBAs first establish the scope,
+start time, affected sessions, and business impact.
+They review wait events, CPU utilization, I/O latency, execution
+plans, SQL statistics, locking, and recent changes as appropriate.
+A high CPU reading alone does not identify the root cause.
+An execution plan should be evaluated with actual workload context.
+Changes should be tested where practical and monitored after
+implementation.
+DBAs compare current symptoms with a known baseline and preserve
+evidence before making production changes.
+
+9. ORACLE TRANSACTION AND UNDO CONCEPTS
+
+A transaction is a logical unit of database work.
+COMMIT makes a transaction's changes permanent.
+ROLLBACK undoes uncommitted changes, subject to transaction scope.
+Undo records support rollback and read consistency.
+Long-running queries and transactions can influence undo requirements.
+ORA-01555 indicates a snapshot-too-old condition and requires
+investigation of query duration, undo retention, workload, and
+undo space behavior rather than assuming one universal cause.
+
+10. BACKUP AND RECOVERY VALIDATION
+
+DBAs define recovery objectives and retention requirements before
+choosing a backup strategy.
+RMAN backup validation checks whether backups can be read and
+whether required backup structures appear usable.
+Restore and recovery testing provides stronger evidence that the
+recovery process can meet operational requirements.
+Backup completion alone does not prove recoverability.
+Recovery procedures should document prerequisites, dependencies,
+expected duration, and post-recovery validation.
