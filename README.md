@@ -2,7 +2,7 @@
 
 ### Senior Database Professional | Oracle DBA | Database Automation | AI & GenAI
 
-Database professional with **16+ years of experience** in database administration, enterprise database operations, troubleshooting, and automation. My primary expertise is Oracle Database, with hands-on experience across multiple database technologies and a strong interest in building reliable, automated solutions.
+Database professional with **18+ years of experience** in database administration, enterprise database operations, troubleshooting, and automation. My primary expertise is Oracle Database, with hands-on experience across multiple database technologies and a strong interest in building reliable, automated solutions.
 
 I am expanding my technical journey into **Artificial Intelligence and Generative AI**, combining my database background with Python, modern AI frameworks, and practical project development.
 
