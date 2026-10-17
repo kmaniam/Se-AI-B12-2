@@ -18,7 +18,7 @@ I am expanding my technical journey into **Artificial Intelligence and Generativ
 ## 🗄️ Database Technologies
 
 - **Primary expertise:** Oracle Database
-- **Additional platforms:** MongoDB, MySQL, PostgreSQL, Microsoft SQL Server, DB2 LUW, and Vertica
+- **Additional platforms:** MongoDB, MySQL, PostgreSQL, Microsoft SQL Server
 - **Administration:** Database operations, troubleshooting, performance tuning, backup and recovery, and high availability
 - **Enterprise tools:** Oracle Enterprise Manager (OEM), ServiceNow, CyberArk, and Dynatrace
 
