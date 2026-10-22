@@ -1,0 +1,52 @@
+Student_id,name,email,phone,course,fee_paid,city,enrolled_date
+STU101,john doe,john.doe@example.com,9876543210,Python Automation,15000,Chennai,9/1/2026
+STU102,SARA CONNOR,sara.c@example.com,+91 98765-43211,Data Science,18000,Bangalore,1/9/2026
+STU103,  mike ross  ,mike.ross@example.com,9876543212,Generative AI,20000,  Mumbai ,9/3/2026
+STU101,john doe,john.doe@example.com,9876543210,Python Automation,15000,Chennai,9/1/2026
+STU104,PRIYA SHARMA,priya.sharma@example.com,98765 43213,Generative AI,12000,DELHI,9/5/2026
+STU105,Alex Care,alex.care@INVALID_EMAIL,9876543214,Full Stack,0,Hyderabad,9/6/2026
+STU106,Anita Roy,anita.roy@example.com,,Data Science,18000,chennai,10/9/2026
+STU107,DAVID MILLER,david.m@example.com,9876543216,Python Automation,15000,Bangalore,9/12/2026
+STU108,  rachel zane,rachel.z@example.com,-9876543126,Generative AI,20000,Mumbai,2026.09.13
+STU109,vikram singh,vikram.s@example.com,9876543218,Full Stack,16000,Pune,9/14/2026
+STU110,LISA MANOBAN,lisa.m@example.com,98765 43219,Data Science,18000,  HYDERABAD,15/09/2026
+STU111,harish kumar,harish.k@example.com,9876543220,Python Automation,15000,chennai,9/16/2026
+STU112,Emma Watson,emma.w@example.com,+91 9876543221,Generative AI,20000,Bangalore,9/17/2026
+STU109,vikram singh,vikram.s@example.com,9876543218,Full Stack,16000,Pune,9/14/2026
+STU113,  KAVYA REDDY  ,kavya.r@example.com,,Generative AI,20000,Hyderabad,18-09-2026
+STU114,Tom Hardy,tom.h@INVALID_DOMAIN,9876543223,Data Science,18000,Delhi,9/19/2026
+STU115,deepak verma,deepak.v@example.com,9876543224,Python Automation,0,  PUNE ,9/20/2026
+STU116,SOPHIA LOREN,sophia.l@example.com,+91 98765-43225,Full Stack,16000,Mumbai,21/09/2026
+STU117,arun prasad,arun.p@example.com,98765 43226,Data Science,18000,Chennai,9/22/2026
+STU118,  BRUCE WAYNE,bruce.w@example.com,9876543227,Generative AI,20000,BANGALORE,2026.09.23
+STU119,Sneha Kapoor,sneha.k@example.com,9876543228,Python Automation,15000,Delhi,9/24/2026
+STU120,clark kent,clark.k@example.com,-9876543138,Full Stack,16000,hyderabad,25-09-2026
+STU121,NITHYA MENON,nithya.m@example.com,,Data Science,18000,Chennai,9/26/2026
+STU118,  BRUCE WAYNE,bruce.w@example.com,9876543227,Generative AI,20000,BANGALORE,2026.09.23
+STU122,Peter Parker,peter.p@example.com,98765 43231,Python Automation,15000,  Mumbai,27/09/2026
+STU123,  meena kumari  ,meena.k@example.com,9876543232,Generative AI,20000,Bangalore,9/28/2026
+STU124,TONY STARK,tony.s@example.com,+91 98765-43233,Full Stack,25000,Pune,9/29/2026
+STU125,rahul dravid,rahul.d@INVALID_EMAIL,9876543234,Data Science,18000,DELHI,9/30/2026
+STU126,Diana Prince,diana.p@example.com,9876543235,Python Automation,15000,Hyderabad,1/10/2026
+STU127,  KIRAN BEDI,kiran.b@example.com,98765 43236,Generative AI,20000,chennai,2026.10.02
+STU128,Suresh Raina,suresh.r@example.com,,Full Stack,16000,Bangalore,10/3/2026
+STU129,NATASHA ROMANOFF,natasha.r@example.com,-9876543147,Data Science,18000,Mumbai,4/10/2026
+STU130,gautam gambhir,gautam.g@example.com,9876543239,Python Automation,15000,PUNE,10/5/2026
+STU124,TONY STARK,tony.s@example.com,+91 98765-43233,Full Stack,25000,Pune,9/29/2026
+STU131,  POOJA HEGDE  ,pooja.h@example.com,98765 43240,Generative AI,20000,  Delhi ,10/6/2026
+STU132,Barry Allen,barry.a@example.com,9876543241,Full Stack,0,Hyderabad,10/7/2026
+STU133,manish pandey,manish.p@example.com,+91 98765-43242,Data Science,18000,Chennai,8/10/2026
+STU134,WANDA MAXIMOFF,wanda.m@INVALID_EMAIL,9876543243,Python Automation,15000,Bangalore,10/9/2026
+STU135,  arthur curry,arthur.c@example.com,98765 43244,Generative AI,20000,MUMBAI,2026.10.10
+STU136,Anushka Shetty,anushka.s@example.com,,Full Stack,16000,Hyderabad,10/11/2026
+STU137,KARTIK AARYAN,kartik.a@example.com,-9876543155,Data Science,18000,chennai,12/10/2026
+STU138,vijay sethupathi,vijay.s@example.com,9876543247,Python Automation,15000,Chennai,10/13/2026
+STU139,STEVE ROGERS,steve.r@example.com,98765 43248,Generative AI,20000,  Bangalore ,10/14/2026
+STU140,  rashmika mandanna,rashmika.m@example.com,9876543249,Full Stack,16000,Delhi,10/15/2026
+STU138,vijay sethupathi,vijay.s@example.com,9876543247,Python Automation,15000,Chennai,10/13/2026
+STU141,Surya Kumar,surya.k@example.com,+91 98765-43250,Data Science,18000,Mumbai,16-10-2026
+STU142,ALIA BHATT,alia.b@INVALID_DOMAIN,9876543251,Generative AI,20000,PUNE,10/17/2026
+STU143,vikram aditya,vikram.a@example.com,98765 43252,Python Automation,15000,Hyderabad,2026.10.18
+STU144,  SAMANTHA RUTH  ,samantha.r@example.com,,Full Stack,16000,chennai,19/10/2026
+STU145,Robert Pattinson,robert.p@example.com,-9876543163,Data Science,18000,Bangalore,10/20/2026
+STU145,Robert Pattinson,robert.p@example.com,-9876543163,Data Science,18000,Bangalore,10/20/2026
