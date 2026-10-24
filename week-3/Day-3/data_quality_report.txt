@@ -1,0 +1,16 @@
+
+    STUDENT ETL - DATA QUALITY REPORT
+    =================================
+
+    Total Records Processed : 51
+
+    DATA QUALITY ISSUES
+    -------------------
+    Invalid Emails          : 5
+    Missing Phone Numbers   : 6
+    Invalid Courses         : 0
+    Missing/Invalid Dates   : 6
+    Missing Student IDs     : 0
+
+    Report Generated Successfully.
+    
