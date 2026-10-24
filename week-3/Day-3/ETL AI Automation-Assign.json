@@ -1,0 +1,261 @@
+{
+  "name": "ETL AI Automation",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "file upload",
+        "formDescription": "student date",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "file upload",
+              "fieldType": "file"
+            }
+          ]
+        },
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.6,
+      "position": [
+        0,
+        0
+      ],
+      "id": "7b660e3e-9668-4bb2-a8be-4214835d2e1e",
+      "name": "Csv upload",
+      "webhookId": "669e7a8c-ae20-414a-ae78-351d3760556b"
+    },
+    {
+      "parameters": {
+        "binaryPropertyName": "file_upload",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1.2,
+      "position": [
+        240,
+        0
+      ],
+      "id": "1d3a4ce6-420e-406d-9e4f-082a5cfaba6d",
+      "name": "Extract from File"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Celan this student enrollment row and return ONLY a JSON object.\n\nRow data: {{ JSON.stringify($('Extract from File').item.json) }}\n\nRules:\n- Name: Title Case (John Doe)\n- Email: if Invalid set INVALID_EMAIL\n- Phone: if less than 10 digits set MISSING\n- Course: only python or Machine Learning or Data Science\n- Fee_paid: If the value is a valid number greater than 0, return true. If 0, empty, null, or missing, return false.\n- City: Title Case, Empty = Unknown\n- Enrolled_Date: Convert to YYYY-MM-DD\n\nReturn ONLY ras JSON. No explanation. No markdown.",
+        "hasOutputParser": true,
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.9,
+      "position": [
+        464,
+        -304
+      ],
+      "id": "75659886-96f6-40e9-8562-2aa165085649",
+      "name": "Basic LLM Chain"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4.1-nano",
+          "mode": "list",
+          "cachedResultName": "gpt-4.1-nano"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        128,
+        -256
+      ],
+      "id": "52cbba9a-5b73-4c17-a3a3-b69cc77d9f30",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "T5i0z8HbZAfrgAqi",
+          "name": "OpenAI account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "\nconst items = $input.all();\n\nconst allowedCourses = {\n  \"python\": \"Python\",\n  \"python automation\": \"Python Automation\",\n  \"machine learning\": \"Machine Learning\",\n  \"data science\": \"Data Science\",\n  \"generative ai\": \"Generative AI\",\n  \"full stack\": \"Full Stack\"\n};\n\nfunction titleCase(value) {\n  const text = String(value ?? \"\").trim();\n  if (!text) return \"Unknown\";\n\n  return text.toLowerCase().replace(/\\b[a-z]/g, c => c.toUpperCase());\n}\n\nfunction cleanDate(value) {\n  const text = String(value ?? \"\").trim();\n\n  if (/^\\d{4}-\\d{2}-\\d{2}$/.test(text)) {\n    return text;\n  }\n\n  // Input example: 23-05-2025 (DD-MM-YYYY)\n  const match = text.match(/^(\\d{1,2})-(\\d{1,2})-(\\d{4})$/);\n\n  if (match) {\n    const [, day, month, year] = match;\n    return `${year}-${month.padStart(2, \"0\")}-${day.padStart(2, \"0\")}`;\n  }\n\n  // Input example: 9/1/2026 (MM/DD/YYYY)\n  const usDate = text.match(/^(\\d{1,2})\\/(\\d{1,2})\\/(\\d{4})$/);\n\n  if (usDate) {\n    const [, month, day, year] = usDate;\n    return `${year}-${month.padStart(2, \"0\")}-${day.padStart(2, \"0\")}`;\n  }\n\n  return \"\";\n}\n\nreturn items.map((item, index) => {\n  const row = item.json;\n\n  const courseKey = String(row.Course ?? \"\").trim().toLowerCase();\n  const fee = String(row.Fee_Paid ?? \"\").trim().toLowerCase();\n\n  return {\n    json: {\n      Student_ID: String(row.Student_ID ?? \"\").trim(),\n      Name: titleCase(row.Name),\n      Email: String(row.Email ?? \"\").trim().toLowerCase(),\n      Phone: String(row.Phone ?? \"\").trim(),\n      Course: allowedCourses[courseKey] ?? titleCase(row.Course),\n      Fee_Paid: [\"yes\", \"true\", \"1\"].includes(fee)\n        ? \"Yes\"\n        : [\"no\", \"false\", \"0\"].includes(fee)\n          ? \"No\"\n          : fee !== \"\" && Number.isFinite(Number(fee)) && Number(fee) > 0\n            ? \"Yes\"\n            : \"No\",\n      City: titleCase(row.City),\n      Enrolled_Date: cleanDate(row.Enrolled_Date)\n    },\n    pairedItem: { item: index }\n  };\n});\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        736,
+        0
+      ],
+      "id": "53b26724-eae0-48e8-b0be-6d9265900063",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 4
+          },
+          "conditions": [
+            {
+              "id": "23482987-9f4a-4060-b3af-e01402d130d1",
+              "leftValue": "={{ $json.City }}",
+              "rightValue": "Chennai",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            },
+            {
+              "id": "3d3d43c3-c56a-43a6-aac0-fbe86cc847c3",
+              "leftValue": "={{ $json.Email }}",
+              "rightValue": "INVALID_EMAIL",
+              "operator": {
+                "type": "string",
+                "operation": "notEquals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.4,
+      "position": [
+        992,
+        0
+      ],
+      "id": "e1ffdb43-52d0-406f-90e0-315415e0c154",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "batchSize": 10,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        816,
+        -272
+      ],
+      "id": "ea4256b0-83af-4d23-8d70-ba5ac6e83e41",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {
+        "operation": "xlsx",
+        "options": {
+          "fileName": "student_clean.xlsx"
+        }
+      },
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        1280,
+        -96
+      ],
+      "id": "1c05119e-0fae-40a0-a78e-97d12e0bd7b3",
+      "name": "Convert to File"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Csv upload": {
+      "main": [
+        [
+          {
+            "node": "Extract from File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract from File": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Basic LLM Chain": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Convert to File",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        []
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "036086e4-2269-4fbc-ad13-a7ab56f9a216",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "e4e3b0a2612a4ebed6e04ca583cddd216f0cccfd1d7af9c5ecf731690be3cbd9"
+  },
+  "nodeGroups": [],
+  "id": "3sTwwG6PkPdHmPDi",
+  "tags": []
+}
