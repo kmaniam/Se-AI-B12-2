@@ -1,0 +1,135 @@
+{
+  "name": "My workflow 2",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "a30ff6ed-f6dd-4dd2-8c0b-6a2fc36f3771",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1RkcshdYK55h151lsodeEimAxyJMJVxoRy0jNWJ4sW8M",
+          "mode": "list",
+          "cachedResultName": "Student-Record",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1RkcshdYK55h151lsodeEimAxyJMJVxoRy0jNWJ4sW8M/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 347426120,
+          "mode": "list",
+          "cachedResultName": "Sheet2",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1RkcshdYK55h151lsodeEimAxyJMJVxoRy0jNWJ4sW8M/edit#gid=347426120"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        224,
+        0
+      ],
+      "id": "e743d08d-8957-4acb-b311-fac55432a212",
+      "name": "Get row(s) in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "GCjVqhMExmO7JuEk",
+          "name": "gmail-kesavaraj"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "\nconst rows = $input.all().map(item => item.json);\n\n// Change this to your recipient email address\nconst recipient = \"your-email@example.com\";\n\nconst subject = `Student Enrollment Report - ${new Date().toLocaleDateString(\"en-GB\")}`;\n\nconst details = rows.map((student, index) => {\n  return `${index + 1}. Student Details\n   Student ID: ${student.Student_id ?? student.Student_Id ?? student.student_id ?? \"N/A\"}\n   Name: ${student.name ?? \"N/A\"}\n   Email: ${student.email ?? \"N/A\"}\n   Phone: ${student.phone ?? \"N/A\"}\n   Course: ${student.course ?? \"N/A\"}\n   Fee Paid: ${student.fee_paid === true ? \"Yes\" : student.fee_paid === false ? \"No\" : \"N/A\"}\n   City: ${student.city ?? \"N/A\"}\n   Enrollment Date: ${student.enrolled_date ?? \"N/A\"}\n   Email Valid: ${student.Email_valid ?? \"N/A\"}`;\n}).join(\"\\n\\n\");\n\nconst body = `Hello,\n\nPlease find below the student enrollment report.\n\nTotal Students: ${rows.length}\n\n${details}\n\nRegards,\nAutomated n8n Workflow`;\n\nreturn [{\n  json: {\n    to: recipient,\n    subject: subject,\n    body: body\n  }\n}];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        448,
+        0
+      ],
+      "id": "7b30e475-981c-4194-b06e-05ff4fddfd02",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.to }}",
+        "subject": "={{ $json.subject }}",
+        "emailType": "text",
+        "message": "={{ $json.body }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        672,
+        0
+      ],
+      "id": "b0dd1c8f-ddfd-4934-a06a-ff1dd1bd0c71",
+      "name": "Send a message",
+      "webhookId": "a85b1af7-5eb9-4217-98fb-3a8030f9f77b",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "EHT1jtblaRI4BzRR",
+          "name": "Gmail account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "d2fe06c9-6980-46f9-996d-2334cce04417",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "e4e3b0a2612a4ebed6e04ca583cddd216f0cccfd1d7af9c5ecf731690be3cbd9"
+  },
+  "nodeGroups": [],
+  "id": "AjStzMIjWoruFgGZ",
+  "tags": []
+}
