@@ -1,0 +1,189 @@
+{
+  "name": "W4-D1/n8n AI Agent for Gmail",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -368,
+        -32
+      ],
+      "id": "091326ef-0d46-4cbb-bdb4-7024f7536eab",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Write ONE line (20 words maximum) describing this email.\nNo greeting, no heading, no extra text.\n\nFrom: {{ $json.From }}\nSubject: {{ $json.Subject }}\nPreview: {{ $json.snippet }}",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        112,
+        -64
+      ],
+      "id": "a63c01a5-9ef6-433c-b149-f5aa4e8a993b",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4.1-mini",
+          "mode": "list",
+          "cachedResultName": "gpt-4.1-mini"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        96,
+        192
+      ],
+      "id": "1c32df22-3249-406f-9940-2793ce691a34",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "T5i0z8HbZAfrgAqi",
+          "name": "OpenAI account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "limit": 5,
+        "filters": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        -144,
+        -32
+      ],
+      "id": "6b71948d-7ec4-4736-9812-8b04a26dfaa7",
+      "name": "Get many messages",
+      "webhookId": "84c1830e-08e2-49da-927d-19a42708f2eb",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "EHT1jtblaRI4BzRR",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "\nconst items = $input.all();\n\nconst summaries = items.map((item, index) => {\n  const summary = String(item.json.output ?? \"\").trim();\n  return `${index + 1}. ${summary}`;\n});\n\nconst emailBody =\n  `Unread Email Summary\\n\\n` +\n  summaries.join(\"\\n\\n\") +\n  `\\n\\nTotal emails summarized: ${items.length}`;\n\nreturn [\n  {\n    json: {\n      subject: `Unread Email Summary - ${items.length} Emails`,\n      body: emailBody,\n      count: items.length\n    }\n  }\n];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        480,
+        -64
+      ],
+      "id": "e3147e78-2c81-478c-8779-5a3f520c7902",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "sendTo": "kesavaraj.subramaniam@outlook.com",
+        "subject": "=\t{{ $json.subject }}",
+        "emailType": "text",
+        "message": "={{ $json.body }}",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        704,
+        -64
+      ],
+      "id": "1edfe45c-56d8-406c-a3f2-547e17473f1e",
+      "name": "Send a message",
+      "webhookId": "2485f86b-e53b-4944-b5d7-9d3ef77a6b47",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "EHT1jtblaRI4BzRR",
+          "name": "Gmail account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Get many messages",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get many messages": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "090b2fa5-3983-41c2-99ca-de6faf3b5b83",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "e4e3b0a2612a4ebed6e04ca583cddd216f0cccfd1d7af9c5ecf731690be3cbd9"
+  },
+  "nodeGroups": [],
+  "id": "Pnnl3R6l3T8oZn8y",
+  "tags": []
+}
